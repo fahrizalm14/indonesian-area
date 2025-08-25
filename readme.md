@@ -51,7 +51,7 @@ console.log(provinsi["11"]); // "ACEH"
 ```ts
 import { getKabupaten } from "indonesian-area";
 
-const kab = await getKabupaten("11");
+const kab = getKabupaten("11");
 console.log(kab["01"]); // "KAB. SIMEULUE"
 
 ```
@@ -61,7 +61,7 @@ console.log(kab["01"]); // "KAB. SIMEULUE"
 ```ts
 import { getKecamatan } from "indonesian-area";
 
-const kec = await getKecamatan("11-01");
+const kec = getKecamatan("11-01");
 console.log(kec["010"]); // "TEUPAH SELATAN"
 ```
 
@@ -70,7 +70,7 @@ console.log(kec["010"]); // "TEUPAH SELATAN"
 ```ts
 import { getKelurahan } from "indonesian-area";
 
-const kel = await getKelurahan("11-01-010");
+const kel = getKelurahan("11-01-010");
 console.log(kel["001"]); // "LATIUNG"
 
 ```
