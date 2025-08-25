@@ -1,9 +1,10 @@
-// src/index.ts
-
-import provinsi from "./data/provinsi/provinsi.json";
+import kabupatenKota from "./data/kabupaten_kota.json";
+import kecamatan from "./data/kecamatan.json";
+import kelurahanDesa from "./data/kelurahan_desa.json";
+import provinsi from "./data/provinsi.json";
 
 /**
- * Tipe untuk hasil setiap level
+ * Struktur data mapping kode ke nama
  */
 export type ProvinsiMap = Record<string, string>; // { "11": "ACEH", ... }
 export type KabupatenMap = Record<string, string>; // { "01": "KAB. SIMEULUE", ... }
@@ -12,54 +13,63 @@ export type KelurahanMap = Record<string, string>; // { "001": "LATIUNG", ... }
 
 /**
  * Ambil daftar provinsi
+ *
+ * @returns {ProvinsiMap} Objek mapping kode provinsi ke nama provinsi.
+ *
+ * @example
+ * ```ts
+ * const prov = getProvinsi();
+ * console.log(prov["11"]); // "ACEH"
+ * ```
  */
 export function getProvinsi(): ProvinsiMap {
-  return provinsi;
+  return provinsi as unknown as ProvinsiMap;
 }
 
 /**
- * Ambil kabupaten/kota berdasarkan provinsi ID
- * @param provinsiId contoh: "11"
+ * Ambil daftar kabupaten/kota berdasarkan ID provinsi
+ *
+ * @param {string} provinsiId - ID provinsi (contoh: "11")
+ * @returns {KabupatenMap | undefined} Objek mapping kode kabupaten/kota ke nama kabupaten/kota, atau `undefined` jika tidak ditemukan.
+ *
+ * @example
+ * ```ts
+ * const kab = getKabupaten("11");
+ * console.log(kab?.["01"]); // "KAB. SIMEULUE"
+ * ```
  */
-export async function getKabupaten(provinsiId: string): Promise<KabupatenMap> {
-  try {
-    const kabupaten = await import(
-      `./data/kabupaten_kota/kab-${provinsiId}.json`
-    );
-    return kabupaten.default as KabupatenMap;
-  } catch {
-    throw new Error(`Kabupaten untuk provinsi ${provinsiId} tidak ditemukan`);
-  }
+export function getKabupaten(provinsiId: string): KabupatenMap | undefined {
+  return (kabupatenKota as Record<string, KabupatenMap>)[provinsiId];
 }
 
 /**
- * Ambil kecamatan berdasarkan kabupaten ID
- * @param kabupatenId contoh: "11-01"
+ * Ambil daftar kecamatan berdasarkan ID kabupaten
+ *
+ * @param {string} kabupatenId - ID kabupaten (contoh: "11-01")
+ * @returns {KecamatanMap | undefined} Objek mapping kode kecamatan ke nama kecamatan, atau `undefined` jika tidak ditemukan.
+ *
+ * @example
+ * ```ts
+ * const kec = getKecamatan("11-01");
+ * console.log(kec?.["010"]); // "TEUPAH SELATAN"
+ * ```
  */
-export async function getKecamatan(kabupatenId: string): Promise<KecamatanMap> {
-  try {
-    const [provId, kabId] = kabupatenId.split("-");
-    const kecamatan = await import(
-      `./data/kecamatan/kec-${provId}-${kabId}.json`
-    );
-    return kecamatan.default as KecamatanMap;
-  } catch {
-    throw new Error(`Kecamatan untuk kabupaten ${kabupatenId} tidak ditemukan`);
-  }
+export function getKecamatan(kabupatenId: string): KecamatanMap | undefined {
+  return (kecamatan as Record<string, KecamatanMap>)[kabupatenId];
 }
 
 /**
- * Ambil kelurahan/desa berdasarkan kecamatan ID
- * @param kecamatanId contoh: "11-01-010"
+ * Ambil daftar kelurahan/desa berdasarkan ID kecamatan
+ *
+ * @param {string} kecamatanId - ID kecamatan (contoh: "11-01-010")
+ * @returns {KelurahanMap | undefined} Objek mapping kode kelurahan/desa ke nama kelurahan/desa, atau `undefined` jika tidak ditemukan.
+ *
+ * @example
+ * ```ts
+ * const kel = getKelurahan("11-01-010");
+ * console.log(kel?.["001"]); // "LATIUNG"
+ * ```
  */
-export async function getKelurahan(kecamatanId: string): Promise<KelurahanMap> {
-  try {
-    const [provId, kabId, kecId] = kecamatanId.split("-");
-    const kelurahan = await import(
-      `./data/kelurahan_desa/keldesa-${provId}-${kabId}-${kecId}.json`
-    );
-    return kelurahan.default as KelurahanMap;
-  } catch {
-    throw new Error(`Kelurahan untuk kecamatan ${kecamatanId} tidak ditemukan`);
-  }
+export function getKelurahan(kecamatanId: string): KelurahanMap | undefined {
+  return (kelurahanDesa as Record<string, KelurahanMap>)[kecamatanId];
 }
