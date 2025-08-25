@@ -1,0 +1,48 @@
+{
+  "name": "indonesian-area",
+  "version": "1.0.2",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --dts --format esm,cjs",
+    "test": "vitest"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Muhammad Andri Fahrizal",
+  "license": "MIT",
+  "description": "Indonesia Administrative Regions (Provinsi, Kabupaten/Kota, Kecamatan, Kelurahan/Desa)",
+  "keywords": [
+    "indonesia",
+    "wilayah",
+    "provinsi",
+    "kabupaten",
+    "kecamatan",
+    "kelurahan",
+    "desa",
+    "administrasi"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fahrizalm14/indonesian-area.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fahrizalm14/indonesian-area/issues"
+  },
+  "homepage": "https://github.com/fahrizalm14/indonesian-area#readme",
+  "engines": {
+    "node": ">=16"
+  },
+  "devDependencies": {
+    "@vitest/coverage-c8": "^0.33.0",
+    "@vitest/ui": "^3.2.4",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

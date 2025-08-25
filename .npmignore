@@ -1,0 +1,35 @@
+# Jangan publish folder dev/build
+node_modules
+dist
+build
+coverage
+
+# File konfigurasi & dev tools
+.env
+*.log
+*.tsbuildinfo
+.vscode/
+.idea/
+
+# Test dan dokumentasi
+test/
+tests/
+__tests__/
+*.spec.ts
+*.test.ts
+
+# JSON besar atau data dummy
+data/
+*.json
+
+# Git dan CI/CD
+.git
+.github/
+.gitignore
+.npmignore
+Dockerfile
+docker-compose.yml
+
+# Misc
+*.md
+*.sh
