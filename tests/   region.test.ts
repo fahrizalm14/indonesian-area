@@ -11,24 +11,24 @@ describe("getProvinsi", () => {
 
 // TEST KABUPATEN
 describe("getKabupaten", () => {
-  it("should return Simeulue for provinsi 11", async () => {
-    const kab = await getKabupaten("11");
-    expect(kab["01"]).toBe("KAB. SIMEULUE");
+  it("should return Simeulue for provinsi 11", () => {
+    const kab = getKabupaten("11");
+    expect(kab && kab["01"]).toBe("KAB. SIMEULUE");
   });
 });
 
 // TEST KECAMATAN
 describe("getKecamatan", () => {
-  it("should return Teupah Selatan for kabupaten 11-01", async () => {
-    const kec = await getKecamatan("11-01");
-    expect(kec["010"]).toBe("TEUPAH SELATAN");
+  it("should return Teupah Selatan for kabupaten 11-01", () => {
+    const kec = getKecamatan("11-01");
+    expect(kec && kec["010"]).toBe("TEUPAH SELATAN");
   });
 });
 
 // TEST KELURAHAN
 describe("getKelurahan", () => {
-  it("should return Latiung for kecamatan 11-01-010", async () => {
-    const kel = await getKelurahan("11-01-010");
-    expect(kel["001"]).toBe("LATIUNG");
+  it("should return Latiung for kecamatan 11-01-010", () => {
+    const kel = getKelurahan("11-01-010");
+    expect(kel && kel["001"]).toBe("LATIUNG");
   });
 });
